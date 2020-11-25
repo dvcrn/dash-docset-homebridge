@@ -1,6 +1,6 @@
 # Dash docset for homebridge.io
 
-Auto-generated from the docs that are available at https://developers.homebridge.io/#/
+Auto-generated from the docs that are available at https://developers.homebridge.io/
 
 ![screenshot](./screenshot.png)
 

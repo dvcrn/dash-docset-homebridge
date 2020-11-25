@@ -33,7 +33,7 @@
         ]
     },
     "ignore": ["ABOUT"],
-    "icon32x32": "",
+    "icon32x32": "homebridge-logo.png",
     "allowJS": true,
-    "ExternalURL": ""
+    "ExternalURL": "https://github.com/dvcrn/dash-docset-homebridge"
 }
