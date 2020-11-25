@@ -1,0 +1,17 @@
+{
+  "name": "hbdocs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "download-docs": "node index.js",
+    "generate-docset": "cd docs/ && dashing build homebridge"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^15.2.1",
+    "mhtml2html": "^3.0.0",
+    "puppeteer": "^5.5.0"
+  }
+}

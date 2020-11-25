@@ -1,0 +1,28 @@
+{
+    "name": "Homebridge",
+    "package": "homebridge",
+    "index": "index.html",
+    "selectors": {
+        "h1": [
+            {
+                "type": "Package",
+                "regexp": "$",
+                "replacement": " Service",
+                "matchpath": "service_.*\\.html"
+            },
+            {
+                "type": "Attribute",
+                "regexp": "$",
+                "replacement": " Characteristic",
+                "matchpath": "characteristic_.*\\.html"
+            }
+        ],
+        "h3": {
+            "type": "Section"
+        }
+    },
+    "ignore": ["ABOUT"],
+    "icon32x32": "",
+    "allowJS": true,
+    "ExternalURL": ""
+}
