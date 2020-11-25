@@ -22,11 +22,11 @@ const createNameFromURL = (url) => {
 };
 
 /**
- * { function_description }
+ * Cleans HTML from things we don't want in the docset
  *
  * @param      {JSDOM}  html    The html
  */
-const parseHTML = (html) => {
+const cleanHtml = (html) => {
     const document = html.window.document;
 
     // remove sidebar
@@ -35,8 +35,12 @@ const parseHTML = (html) => {
     // adjust margin to account for removed sidebar
     document.querySelector('.docs-content').setAttribute('style', 'margin-left:0 !important;');
 
-    // remove top bar
+    // remove header/footer
     document.querySelector('.header').remove();
+    document.querySelector('.footer').remove();
+
+    // Make container 100% width
+    document.querySelectorAll('.container').forEach((e) => e.setAttribute('style', 'max-width:100% !important'));
 
     // remove 'base' tag since it's messing with urls
     document.querySelectorAll('base').forEach((e) => e.remove());
@@ -49,14 +53,11 @@ const parseHTML = (html) => {
     return html;
 };
 
-const downloadPage = async (url, output) => {
-    const browser = await puppeteer.launch();
+const downloadPage = async (browser, url, output) => {
     const page = await browser.newPage();
 
-    await page.goto(url, { waitUntil: 'load' });
-
-    const title = await page.title();
-    console.log(title);
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
+    await page.screenshot({ path: '/tmp/screenshot.png' });
 
     const html = await page.content();
 
@@ -64,20 +65,23 @@ const downloadPage = async (url, output) => {
     const { data } = await cdp.send('Page.captureSnapshot', { format: 'mhtml' });
 
     const htmlDoc = mhtml2html.convert(data, { parseDOM: (html) => new JSDOM(html) });
-    const parsedHtml = parseHTML(htmlDoc);
+    const parsedHtml = cleanHtml(htmlDoc);
 
     fs.writeFileSync(`docs/${output}.html`, parsedHtml.serialize(), 'utf-8');
 
-    await browser.close();
+    await page.close();
+
     return;
 };
 
 const parseSitemap = async (res) => {
+    const browser = await puppeteer.launch();
     const resText = await res.text();
     for (const el of resText.split('\n')) {
-        console.log(`${el} => dist/${createNameFromURL(el)}.html`);
-        await downloadPage(el, createNameFromURL(el));
+        console.log(`${el} => docs/${createNameFromURL(el)}.html`);
+        await downloadPage(browser, el, createNameFromURL(el));
     }
+    await browser.close();
 };
 
 fetch(SITEMAP_URL).then(parseSitemap);
