@@ -6,20 +6,31 @@
         "h1": [
             {
                 "type": "Package",
-                "regexp": "$",
-                "replacement": " Service",
                 "matchpath": "service_.*\\.html"
             },
             {
-                "type": "Attribute",
-                "regexp": "$",
-                "replacement": " Characteristic",
+                "type": "Property",
                 "matchpath": "characteristic_.*\\.html"
+            },
+            {
+                "type": "Guide",
+                "matchpath": "api_.*\\.html"
             }
         ],
-        "h3": {
-            "type": "Section"
-        }
+        "h3": [
+            {
+                "type": "Section",
+                "matchpath": "characteristic_.*\\.html"
+            },
+            {
+                "type": "Section",
+                "matchpath": "service_.*\\.html"
+            },
+            {
+                "type": "Method",
+                "matchpath": "api_.*\\.html"
+            }
+        ]
     },
     "ignore": ["ABOUT"],
     "icon32x32": "",
