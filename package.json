@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "download-docs": "node index.js",
-    "generate-docset": "cd docs/ && dashing build homebridge"
+    "generate-docset": "cd docs/ && dashing build homebridge && cp icon*.png homebridge.docset/"
   },
   "author": "",
   "license": "ISC",
