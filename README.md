@@ -6,7 +6,13 @@ Auto-generated from the docs that are available at https://developers.homebridge
 
 ## Download
 
-Download the [latest docset](https://github.com/dvcrn/dash-docset-homebridge/releases/latest) from Releases section
+Download from the "User Contributed" section from within dash
+
+-- OR -- 
+
+Alternatively download the [latest docset](https://github.com/dvcrn/dash-docset-homebridge/releases/latest) from Releases section from this repo. 
+
+**Note:** If possible, download it from within Dash so it'll stay up-to-date when new releases are pushed. Installing it manually means you won't get updates
 
 ## Building yourself
 
